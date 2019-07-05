@@ -36,6 +36,9 @@
     NSString *overview = dictionary[@"overview"];
     NSString *image = dictionary[@"poster_path"];
     float rating = [dictionary[@"vote_average"] floatValue];
+    if ([image isKindOfClass:[NSNull class]]) {
+        image = nil;
+    }
     
     return [self initWithTitle:title overview:overview image:image rating:rating];
 }

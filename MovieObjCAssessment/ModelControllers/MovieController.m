@@ -63,6 +63,11 @@ static NSString * const imageBaseURL = @"https://image.tmdb.org/t/p/w500";
 
 - (void)fetchImage:(Movie *)movieToFechImage completion:(void (^)(UIImage * _Nullable))completion
 {
+    if (movieToFechImage.image == nil) {
+        completion(nil);
+        return;
+    }
+    
     NSURL *baseImageURL = [NSURL URLWithString:imageBaseURL];
     NSURL *finalURL = [baseImageURL URLByAppendingPathComponent:movieToFechImage.image];
     [[[NSURLSession sharedSession] dataTaskWithURL:finalURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {

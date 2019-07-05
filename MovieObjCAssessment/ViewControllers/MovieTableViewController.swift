@@ -32,14 +32,9 @@ class MovieTableViewController: UITableViewController {
         cell.movieTitle.text = movie.title
         cell.movieOverviewTextView.text = movie.overview
         cell.movieRatingLabel.text = "\(movie.rating)"
-            MovieController.shared().fetchImage(movie) { (image) in
-                if let image = image {
-                DispatchQueue.main.async {
-                    cell.movieImage.image = image
-                    }
-                    else {
-                        print ("Image was nil :/")
-                    }
+        MovieController.shared().fetchImage(movie) { (image) in
+            DispatchQueue.main.async {
+                cell.movieImage.image = image
             }
         }
         return cell
