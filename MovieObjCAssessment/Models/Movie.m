@@ -31,7 +31,7 @@
 {
     NSString *title = dictionary[@"title"];
     NSString *overview = dictionary[@"overview"];
-    float rating = [dictionary[@"popularity"] floatValue];
+    float rating = [dictionary[@"vote_average"] floatValue];
     
     return [self initWithTitle:title overview:overview rating:rating];
 }

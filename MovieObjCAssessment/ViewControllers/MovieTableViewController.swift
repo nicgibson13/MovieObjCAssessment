@@ -9,22 +9,53 @@
 import UIKit
 
 class MovieTableViewController: UITableViewController {
-
-    var movies: [Movie] = []
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    var movies: [Movie] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        MovieController.shared().fetchMovie(withTerm: "Star Wars") { (moviesFromCompletion) in
+            self.movies = moviesFromCompletion
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "movieCell", for: indexPath) as? MovieTableViewCell else {return UITableViewCell()}
+        let movie = movies[indexPath.row]
+        cell.movieTitle.text = movie.title
+        cell.movieOverviewTextView.text = movie.overview
+        cell.movieRatingLabel.text = "\(movie.rating)"
+        //        cell.movieImage.image = movie.image
         
-
-
         return cell
     }
 }
+
+extension MovieTableViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchTerm = searchBar.text, searchTerm != "" else {return}
+        MovieController.shared().fetchMovie(withTerm: searchTerm) { (moviesFromCompletion) in
+            self.movies = moviesFromCompletion
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                searchBar.text = ""
+            }
+        }
+    }
+}
+

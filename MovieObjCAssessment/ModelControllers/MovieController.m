@@ -23,7 +23,7 @@ static NSString * const imageBaseURL = @"https://image.tmdb.org/t/p/w500";
     return sharedController;
 }
 
-- (void)fetchMovieWithTerm:(NSString *)term completion:(void (^)(NSArray *))completion
+- (void)fetchMovieWithTerm:(NSString *)term completion:(void (^)(NSArray<Movie *> *))completion
 {
     NSURL *url = [NSURL URLWithString:baseURL];
     NSURLComponents *components = [NSURLComponents componentsWithURL:url resolvingAgainstBaseURL:true];

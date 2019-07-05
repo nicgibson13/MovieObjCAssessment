@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 // Source of truth
 @property (nonatomic, copy) NSArray<Movie *> *movies;
 
--(void)fetchMovieWithTerm:(NSString *)term completion:(void (^)(NSArray *))completion;
+-(void)fetchMovieWithTerm:(NSString *)term completion:(void (^)(NSArray<Movie *> *))completion;
 
 //-(void)fetchImage:(Movie *)movieToFechImage completion: (void (^) (UIImage *))completion;
 
