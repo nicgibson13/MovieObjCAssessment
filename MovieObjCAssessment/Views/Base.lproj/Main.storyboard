@@ -57,12 +57,9 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="(overview)" textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p1H-nQ-L9G">
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="(overview)" textAlignment="natural" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p1H-nQ-L9G">
                                                             <rect key="frame" x="0.0" y="66.5" width="240" height="83"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="83" id="OXn-OQ-GQF"/>
-                                                            </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                         </textView>
@@ -70,7 +67,6 @@
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="p1H-nQ-L9G" secondAttribute="trailing" id="NJK-ba-wOJ"/>
                                                         <constraint firstItem="p1H-nQ-L9G" firstAttribute="top" secondItem="nHh-rH-bQ5" secondAttribute="bottom" constant="8" id="VFZ-Vb-npr"/>
-                                                        <constraint firstAttribute="height" constant="149.5" id="oMr-lx-Pee"/>
                                                         <constraint firstItem="p1H-nQ-L9G" firstAttribute="leading" secondItem="2TH-aS-me1" secondAttribute="leading" id="pV8-dG-b2a"/>
                                                     </constraints>
                                                 </stackView>
