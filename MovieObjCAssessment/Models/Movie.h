@@ -12,6 +12,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Movie : NSObject
 
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *overview;
+//@property (nonatomic, copy, nullable) NSString *image;
+@property (nonatomic) float rating;
+
+-(instancetype)initWithTitle:(NSString *)title
+                    overview:(NSString *)overview
+                      rating:(float)rating;
+
+@end
+
+@interface Movie (JSONConvertable)
+
+-(instancetype)initWithDictionary:(NSDictionary *)dictionary;
+
 @end
 
 NS_ASSUME_NONNULL_END
