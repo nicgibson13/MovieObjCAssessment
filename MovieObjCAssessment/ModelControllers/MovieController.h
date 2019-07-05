@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)fetchMovieWithTerm:(NSString *)term completion:(void (^)(NSArray<Movie *> *))completion;
 
--(void)fetchImage:(Movie *)movieToFechImage completion: (void (^) (UIImage *))completion;
+-(void)fetchImage:(Movie *)movieToFechImage completion: (void (^) (UIImage * _Nullable))completion;
 
 @end
 

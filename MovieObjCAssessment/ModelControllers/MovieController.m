@@ -28,7 +28,7 @@ static NSString * const imageBaseURL = @"https://image.tmdb.org/t/p/w500";
     NSURL *url = [NSURL URLWithString:baseURL];
     NSURLComponents *components = [NSURLComponents componentsWithURL:url resolvingAgainstBaseURL:true];
     NSURLQueryItem *apiKey = [[NSURLQueryItem alloc] initWithName:@"api_key" value:@"f263ca83d42eba9997e31373d6b38788"];
-    NSURLQueryItem *searchTerm = [[NSURLQueryItem alloc] initWithName:@"query" value:@"Star Wars"];
+    NSURLQueryItem *searchTerm = [[NSURLQueryItem alloc] initWithName:@"query" value:term];
     components.queryItems = @[apiKey, searchTerm];
     NSURL *finalURL = components.URL;
     NSLog(@"%@",finalURL);
@@ -61,7 +61,7 @@ static NSString * const imageBaseURL = @"https://image.tmdb.org/t/p/w500";
     }] resume];
 }
 
-- (void)fetchImage:(Movie *)movieToFechImage completion:(void (^)(UIImage * _Nonnull))completion
+- (void)fetchImage:(Movie *)movieToFechImage completion:(void (^)(UIImage * _Nullable))completion
 {
     NSURL *baseImageURL = [NSURL URLWithString:imageBaseURL];
     NSURL *finalURL = [baseImageURL URLByAppendingPathComponent:movieToFechImage.image];
@@ -78,6 +78,7 @@ static NSString * const imageBaseURL = @"https://image.tmdb.org/t/p/w500";
             UIImage *movieImage = [UIImage imageWithData:data];
             completion(movieImage);
         }
+        
     }] resume];
 }
 

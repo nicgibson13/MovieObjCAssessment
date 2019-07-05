@@ -12,23 +12,15 @@ class MovieTableViewController: UITableViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var movies: [Movie] = [] {
-        didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
+    var movies: [Movie] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        MovieController.shared().fetchMovie(withTerm: "Star Wars") { (moviesFromCompletion) in
-            self.movies = moviesFromCompletion
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
     }
+    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count
@@ -40,21 +32,25 @@ class MovieTableViewController: UITableViewController {
         cell.movieTitle.text = movie.title
         cell.movieOverviewTextView.text = movie.overview
         cell.movieRatingLabel.text = "\(movie.rating)"
-        MovieController.shared().fetchImage(movie) { (image) in
-            DispatchQueue.main.async {
-                cell.movieImage.image = image
+            MovieController.shared().fetchImage(movie) { (image) in
+                if let image = image {
+                DispatchQueue.main.async {
+                    cell.movieImage.image = image
+                    }
+                    else {
+                        print ("Image was nil :/")
+                    }
             }
         }
-        
         return cell
     }
 }
 
 extension MovieTableViewController: UISearchBarDelegate {
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchTerm = searchBar.text, searchTerm != "" else {return}
-        MovieController.shared().fetchMovie(withTerm: searchTerm) { (moviesFromCompletion) in
-            self.movies = moviesFromCompletion
+        MovieController.shared().fetchMovie(withTerm: searchTerm) { (movies) in
+            self.movies = movies
             DispatchQueue.main.async {
                 self.tableView.reloadData()
                 searchBar.text = ""
