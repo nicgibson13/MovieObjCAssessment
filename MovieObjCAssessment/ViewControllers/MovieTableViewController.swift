@@ -12,7 +12,8 @@ class MovieTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        MovieController.shared().fetchMovie(withTerm: "Star Wars") { (success) in
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
