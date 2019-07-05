@@ -61,6 +61,24 @@ static NSString * const imageBaseURL = @"https://image.tmdb.org/t/p/w500";
     }] resume];
 }
 
-//- (void)fetchImage:(Movie *)movieToFechImage completion:(void (^)(UIImage * _Nonnull))completion
+- (void)fetchImage:(Movie *)movieToFechImage completion:(void (^)(UIImage * _Nonnull))completion
+{
+    NSURL *baseImageURL = [NSURL URLWithString:imageBaseURL];
+    NSURL *finalURL = [baseImageURL URLByAppendingPathComponent:movieToFechImage.image];
+    [[[NSURLSession sharedSession] dataTaskWithURL:finalURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error)
+        {
+            NSLog(@"There was an error in %s: %@, %@", __PRETTY_FUNCTION__, error, [error localizedDescription]);
+            completion(nil);
+            return;
+        }
+        
+        if(data)
+        {
+            UIImage *movieImage = [UIImage imageWithData:data];
+            completion(movieImage);
+        }
+    }] resume];
+}
 
 @end

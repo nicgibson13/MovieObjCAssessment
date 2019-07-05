@@ -10,15 +10,18 @@
 
 @implementation Movie
 
-- (instancetype)initWithTitle:(NSString *)title overview:(NSString *)overview rating:(float)rating
+- (instancetype)initWithTitle:(NSString *)title
+                     overview:(NSString *)overview
+                        image:(NSString *)image
+                       rating:(float)rating
 {
     self = [super init];
     if (self)
     {
         _title = title;
         _overview = overview;
+        _image = image;
         _rating = rating;
-//        _image = image
     }
     return self;
 }
@@ -31,9 +34,10 @@
 {
     NSString *title = dictionary[@"title"];
     NSString *overview = dictionary[@"overview"];
+    NSString *image = dictionary[@"poster_path"];
     float rating = [dictionary[@"vote_average"] floatValue];
     
-    return [self initWithTitle:title overview:overview rating:rating];
+    return [self initWithTitle:title overview:overview image:image rating:rating];
 }
 
 @end

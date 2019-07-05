@@ -40,14 +40,18 @@ class MovieTableViewController: UITableViewController {
         cell.movieTitle.text = movie.title
         cell.movieOverviewTextView.text = movie.overview
         cell.movieRatingLabel.text = "\(movie.rating)"
-        //        cell.movieImage.image = movie.image
+        MovieController.shared().fetchImage(movie) { (image) in
+            DispatchQueue.main.async {
+                cell.movieImage.image = image
+            }
+        }
         
         return cell
     }
 }
 
 extension MovieTableViewController: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         guard let searchTerm = searchBar.text, searchTerm != "" else {return}
         MovieController.shared().fetchMovie(withTerm: searchTerm) { (moviesFromCompletion) in
             self.movies = moviesFromCompletion

@@ -14,11 +14,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *overview;
-//@property (nonatomic, copy, nullable) NSString *image;
+@property (nonatomic, copy, nullable) NSString *image;
 @property (nonatomic) float rating;
 
 -(instancetype)initWithTitle:(NSString *)title
                     overview:(NSString *)overview
+                       image:(NSString *)image
                       rating:(float)rating;
 
 @end
